@@ -50,6 +50,10 @@ class HomeScreen extends StatelessWidget {
             ),
             // ignore: prefer_const_constructors
             _NoteCard(),
+            const SizedBox(
+              height: 20,
+            ),
+            _NoteCard(),
           ]),
         ),
       ),
@@ -68,10 +72,11 @@ class _NoteCard extends StatelessWidget {
           borderRadius: BorderRadius.all(
         Radius.circular(30),
       )),
-      child: Expanded(
-        child: SizedBox(
-          width: 500,
-          height: 180,
+      child: SizedBox(
+        width: double.infinity,
+        height: 250,
+        child: Center(
+          child: Text('hola mundo'),
         ),
       ),
     );
