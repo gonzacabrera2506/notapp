@@ -5,45 +5,75 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-        ),
-        actions: [
-          IconButton(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+              child: Text(
+            'Mis Notas',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )),
+          leading: IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.settings),
-          )
-        ],
+            icon: const Icon(Icons.add),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 3),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.settings),
+              ),
+            )
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(children: [
+            const SizedBox(
+              height: 3,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  suffixIcon: Icon(Icons.search),
+                  hintText: 'Buscar...',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ))),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            // ignore: prefer_const_constructors
+            _NoteCard(),
+          ]),
+        ),
       ),
-      body: _ListNotes(),
     );
   }
 }
 
-class _ListNotes extends StatelessWidget {
+class _NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 15,
-      itemBuilder: (context, index) {
-        return _CustomListTile();
-      },
-    );
-  }
-}
+    //final Size size = MediaQuery.of(context).size;
 
-class _CustomListTile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    return ListTile(
-      leading: Icon(Icons.abc, color: colors.primary),
-      trailing: Icon(Icons.arrow_forward_ios_rounded, color: colors.primary),
-      title: const Text('hola'),
-      subtitle: const Text('mundo'),
+    return const Card(
+      color: Colors.red,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+        Radius.circular(30),
+      )),
+      child: Expanded(
+        child: SizedBox(
+          width: 500,
+          height: 180,
+        ),
+      ),
     );
   }
 }
