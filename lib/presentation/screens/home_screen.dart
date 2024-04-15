@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notapp/presentation/shared/widgets/TextField.widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
           leading: IconButton(
             onPressed: () {},
             icon: const Icon(Icons.add),
+            tooltip: "Nueva nota",
           ),
           actions: [
             Padding(
@@ -36,32 +38,34 @@ class HomeScreen extends StatelessWidget {
             )
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(children: [
-            const SizedBox(
-              height: 3,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                  suffixIcon: Icon(Icons.search),
-                  hintText: 'Buscar...',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ))),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            _NoteCard(),
-            const SizedBox(
-              height: 20,
-            ),
-            _NoteCard(),
-          ]),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(children: [
+              const SizedBox(
+                height: 3,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    suffixIcon: Icon(Icons.search),
+                    hintText: 'Buscar...',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ))),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const TextFieldWidget(),
+              const SizedBox(
+                height: 50,
+              ),
+              //_NoteCard(),
+            ]),
+          ),
         ),
       ),
     );
@@ -113,28 +117,7 @@ class _PopupMenuButton extends StatelessWidget {
         }).toList();
       },
       icon: const Icon(Icons.more_horiz),
-    );
-  }
-}
-
-class _NoteCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //final Size size = MediaQuery.of(context).size;
-
-    return const Card(
-      color: Colors.white10,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(30),
-      )),
-      child: SizedBox(
-        width: double.infinity,
-        height: 250,
-        child: Center(
-          child: Text('hola mundo'),
-        ),
-      ),
+      tooltip: "Menú",
     );
   }
 }
