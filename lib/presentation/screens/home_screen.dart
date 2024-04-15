@@ -5,6 +5,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> menuButtons = [
+      const _IconTextWidget(
+        iconData: Icons.list,
+        text: 'Lista de notas',
+      ),
+      const _IconTextWidget(
+        iconData: Icons.delete,
+        text: 'Eliminar nota',
+      ),
+      // Agrega más elementos de menú según sea necesario
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Scaffold(
@@ -21,10 +32,7 @@ class HomeScreen extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 3),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.settings),
-              ),
+              child: _PopupMenuButton(menuButtons: menuButtons),
             )
           ],
         ),
@@ -48,7 +56,6 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            // ignore: prefer_const_constructors
             _NoteCard(),
             const SizedBox(
               height: 20,
@@ -61,13 +68,62 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class _IconTextWidget extends StatelessWidget {
+  final IconData iconData;
+  final String text;
+
+  const _IconTextWidget({
+    Key? key,
+    required this.iconData,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(iconData),
+        // ignore: prefer_const_constructors
+        SizedBox(width: 8), // Espacio entre el icono y el texto
+        Text(
+          text,
+        ),
+      ],
+    );
+  }
+}
+
+class _PopupMenuButton extends StatelessWidget {
+  const _PopupMenuButton({
+    required this.menuButtons,
+  });
+
+  final List<Widget> menuButtons;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+      itemBuilder: (BuildContext context) {
+        return menuButtons.map((Widget menuButton) {
+          return PopupMenuItem<String>(
+            value: 'menuItem',
+            child: menuButton,
+          );
+        }).toList();
+      },
+      icon: const Icon(Icons.more_horiz),
+    );
+  }
+}
+
 class _NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final Size size = MediaQuery.of(context).size;
 
     return const Card(
-      color: Colors.red,
+      color: Colors.white10,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
         Radius.circular(30),
