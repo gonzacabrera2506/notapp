@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:notapp/presentation/shared/widgets/TextField.widget.dart';
+import 'package:notapp/presentation/shared/widgets/customSwitch.widget.dart';
+import 'package:notapp/presentation/shared/widgets/customTextFormField.widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool dark = false;
+  void _updateLabelCustomButtom() {
+    setState(() {
+      dark = !dark;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,58 +30,49 @@ class HomeScreen extends StatelessWidget {
       ),
       // Agrega más elementos de menú según sea necesario
     ];
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Center(
-              child: Text(
-            'Mis Notas',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add),
-            tooltip: "Nueva nota",
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 3),
-              child: _PopupMenuButton(menuButtons: menuButtons),
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(children: [
-              const SizedBox(
-                height: 3,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Scaffold(
+            appBar: AppBar(
+              toolbarHeight: 80,
+              backgroundColor: Colors.tealAccent,
+              title: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.note),
+                        SizedBox(width: 10),
+                        Text(
+                          'NotApp',
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ]),
+              actions: [
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: IconButton(
+                      icon: Icon(
+                          dark ? Icons.wb_sunny_outlined : Icons.dark_mode),
+                      onPressed: _updateLabelCustomButtom,
+                    ))
+              ],
+            ),
+            body: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                children: [
+                  SizedBox(height: 15),
+                  Text(
+                    "Mis Notas",
+                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                    suffixIcon: Icon(Icons.search),
-                    hintText: 'Buscar...',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ))),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const TextFieldWidget(),
-              const SizedBox(
-                height: 50,
-              ),
-              //_NoteCard(),
-            ]),
-          ),
-        ),
-      ),
-    );
+            )));
   }
 }
 

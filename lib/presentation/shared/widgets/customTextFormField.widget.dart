@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key});
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       minLines: 5,
       maxLines: null,
       decoration: InputDecoration(
