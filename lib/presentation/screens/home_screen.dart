@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notapp/presentation/shared/widgets/customBottomNavigationBar_widget.dart';
+import 'package:notapp/widgets/customBottomNavigationBar_widget.dart';
+import 'package:notapp/widgets/customCardWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,18 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> menuButtons = [
-      const _IconTextWidget(
-        iconData: Icons.list,
-        text: 'Lista de notas',
-      ),
-      const _IconTextWidget(
-        iconData: Icons.delete,
-        text: 'Eliminar nota',
-      ),
-      // Agrega más elementos de menú según sea necesario
-    ];
-
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Scaffold(
@@ -62,67 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                SizedBox(height: 15),
-                Text(
-                  "Mis Notas",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Mis Notas",
+                        style: TextStyle(
+                            fontSize: 35, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Customcardwidget(),
+                  Customcardwidget(),
+                  Customcardwidget(),
+                  Customcardwidget(),
+                  Customcardwidget(),
+                  SizedBox(height: 10),
+                ],
+              ),
             ),
           ),
-          bottomNavigationBar: CustomNavigationBar(),
+          bottomNavigationBar: const CustomNavigationBar(),
         ));
-  }
-}
-
-class _IconTextWidget extends StatelessWidget {
-  final IconData iconData;
-  final String text;
-
-  const _IconTextWidget({
-    Key? key,
-    required this.iconData,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(iconData),
-        // ignore: prefer_const_constructors
-        SizedBox(width: 8), // Espacio entre el icono y el texto
-        Text(
-          text,
-        ),
-      ],
-    );
-  }
-}
-
-class _PopupMenuButton extends StatelessWidget {
-  const _PopupMenuButton({
-    required this.menuButtons,
-  });
-
-  final List<Widget> menuButtons;
-
-  @override
-  Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      itemBuilder: (BuildContext context) {
-        return menuButtons.map((Widget menuButton) {
-          return PopupMenuItem<String>(
-            value: 'menuItem',
-            child: menuButton,
-          );
-        }).toList();
-      },
-      icon: const Icon(Icons.more_horiz),
-      tooltip: "Menú",
-    );
   }
 }
