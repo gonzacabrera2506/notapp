@@ -1,6 +1,5 @@
 import 'package:notapp/domain/entities/note.dart';
 
-abstract class LocalStorageDatasource {
+abstract class LocalStorageRepository {
   Future<List<Note>> loadNotes();
-  Future<void> addNote(Note note);
 }
