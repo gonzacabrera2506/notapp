@@ -1,12 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:notapp/presentation/screens/home_screen.dart';
+import 'package:notapp/presentation/screens/note_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/home',
   routes: [
     GoRoute(
       path: '/home',
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const NoteScreen(),
     )
   ],
 );
