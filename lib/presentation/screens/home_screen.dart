@@ -3,6 +3,7 @@ import 'package:notapp/widgets/customBottomNavigationBar_widget.dart';
 import 'package:notapp/widgets/customCardWidget.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String name = 'home_screen';
   const HomeScreen({super.key});
 
   @override

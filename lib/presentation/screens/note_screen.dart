@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:notapp/widgets/customBottomNavigationBar_widget.dart';
 import 'package:notapp/widgets/customTextFormField.widget.dart';
 
 class NoteScreen extends StatefulWidget {
+  static const String name = 'note_screen';
   const NoteScreen({super.key});
 
   @override

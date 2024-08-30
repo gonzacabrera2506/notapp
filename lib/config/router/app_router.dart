@@ -7,6 +7,12 @@ final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/home',
+      name: HomeScreen.name,
+      builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
+      path: '/add-note',
+      name: NoteScreen.name,
       builder: (context, state) => const NoteScreen(),
     )
   ],
