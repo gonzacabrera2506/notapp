@@ -7,6 +7,7 @@ class Customcardwidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
+      color: Colors.white,
       shadowColor: Colors.black87,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -30,8 +31,13 @@ class Customcardwidget extends StatelessWidget {
                   child: ButtonBar(
                     children: <Widget>[
                       IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.delete)),
-                      IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
+                          tooltip: 'Eliminar nota',
+                          onPressed: () {},
+                          icon: const Icon(Icons.delete)),
+                      IconButton(
+                          tooltip: 'Modificar nota',
+                          onPressed: () {},
+                          icon: const Icon(Icons.edit))
                     ],
                   ),
                 )

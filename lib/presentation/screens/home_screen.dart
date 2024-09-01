@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             toolbarHeight: 80,
             backgroundColor: Colors.tealAccent,
@@ -68,16 +69,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 10),
                   Customcardwidget(),
+                  SizedBox(height: 10),
                   Customcardwidget(),
+                  SizedBox(height: 10),
                   Customcardwidget(),
+                  SizedBox(height: 10),
                   Customcardwidget(),
+                  SizedBox(height: 10),
                   Customcardwidget(),
                   SizedBox(height: 10),
                 ],
               ),
             ),
           ),
-          bottomNavigationBar: const CustomNavigationBar(),
+          bottomNavigationBar: const CustomNavigationBar(
+            currentIndex: 0,
+          ),
         ));
   }
 }

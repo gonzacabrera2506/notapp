@@ -1,43 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomNavigationBar extends StatefulWidget {
-  const CustomNavigationBar({super.key});
-
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
-}
-
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
-  int currentPageIndex = 0;
+class CustomNavigationBar extends StatelessWidget {
+  final int currentIndex;
+  const CustomNavigationBar({super.key, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
+      backgroundColor: Colors.white54,
       onDestinationSelected: (int index) {
-        setState(() {
-          currentPageIndex = index;
-        });
-
-        switch (index) {
-          case 0:
-            context.push('/home');
-            break;
-          case 1:
-            context.push('/add-note');
-            break;
+        if (index != currentIndex) {
+          switch (index) {
+            case 0:
+              context.go('/home');
+              break;
+            case 1:
+              context.go('/add-note');
+              break;
+          }
         }
       },
       indicatorColor: Colors.tealAccent,
-      selectedIndex: currentPageIndex,
+      selectedIndex: currentIndex,
       destinations: const <Widget>[
         NavigationDestination(
+          tooltip: '',
           selectedIcon: Icon(Icons.home),
           icon: Icon(Icons.home_outlined),
           label: 'Home',
         ),
         NavigationDestination(
-          selectedIcon: Icon(Icons.add),
+          tooltip: '',
+          selectedIcon: Icon(Icons.add_circle_outlined),
           icon: Icon(Icons.add_circle_outline_sharp),
           label: 'Agregar nota',
         ),

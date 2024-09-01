@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notapp/widgets/customBottomNavigationBar_widget.dart';
+import 'package:notapp/widgets/customElevatedButtonWidget.dart';
 import 'package:notapp/widgets/customTextFormField.widget.dart';
 
 class NoteScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class _NoteScreenState extends State<NoteScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 80,
           backgroundColor: Colors.tealAccent,
@@ -33,13 +36,13 @@ class _NoteScreenState extends State<NoteScreen> {
             ),
           ]),
         ),
-        body: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 15),
-                Row(
+                const SizedBox(height: 15),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
@@ -49,24 +52,78 @@ class _NoteScreenState extends State<NoteScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 CustomTextFormField(
                   minLines: 1,
                   maxLines: 1,
                   hintText: "Título...",
+                  suffixIcon: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.clear)),
                 ),
-                SizedBox(height: 10),
-                CustomTextFormField(
-                  minLines: 15,
-                  maxLines: 15,
+                const SizedBox(height: 10),
+                const CustomTextFormField(
+                  minLines: 13,
+                  maxLines: 13,
                   hintText: "Escribe aqui...",
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                            tooltip: 'Negrita',
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.bold,
+                              size: 13,
+                            )),
+                        const SizedBox(width: 8),
+                        IconButton(
+                            tooltip: 'Cursiva',
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.italic,
+                              size: 13,
+                            )),
+                        const SizedBox(width: 8),
+                        IconButton(
+                            tooltip: 'Subrayado',
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.underline,
+                              size: 13,
+                            )),
+                        const SizedBox(width: 8),
+                        IconButton(
+                            tooltip: 'Tachado',
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.strikethrough,
+                              size: 13,
+                            )),
+                        IconButton(
+                            tooltip: 'Activar/desactivar viñetas',
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.listUl,
+                              size: 13,
+                            )),
+                      ],
+                    ),
+                    const CustomElevatedButton(
+                      text: 'Guardar',
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: const CustomNavigationBar(),
+        bottomNavigationBar: const CustomNavigationBar(
+          currentIndex: 1,
+        ),
       ),
     );
   }
