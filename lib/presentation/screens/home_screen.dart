@@ -21,11 +21,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 1),
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            toolbarHeight: 80,
+            toolbarHeight: 50,
             backgroundColor: Colors.tealAccent,
             title: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -45,8 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: IconButton(
-                    icon:
-                        Icon(dark ? Icons.wb_sunny_outlined : Icons.dark_mode),
+                    icon: Icon(
+                      dark ? Icons.wb_sunny_outlined : Icons.dark_mode,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                     onPressed: _updateLabelCustomButtom,
                   ))
             ],
@@ -56,28 +58,28 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 15),
+                  SizedBox(height: 9),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         "Mis Notas",
                         style: TextStyle(
-                            fontSize: 35, fontWeight: FontWeight.bold),
+                            fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
                   Customcardwidget(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Customcardwidget(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Customcardwidget(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Customcardwidget(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Customcardwidget(),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                 ],
               ),
             ),

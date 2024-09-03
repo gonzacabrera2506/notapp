@@ -16,11 +16,11 @@ class _NoteScreenState extends State<NoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 1),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: 50,
           backgroundColor: Colors.tealAccent,
           title:
               const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -41,32 +41,36 @@ class _NoteScreenState extends State<NoteScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 15),
+                const SizedBox(height: 9),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       "Agregar Nota",
                       style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 CustomTextFormField(
                   minLines: 1,
                   maxLines: 1,
                   hintText: "Título...",
                   suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.clear)),
+                      onPressed: () {},
+                      icon: const FaIcon(
+                        FontAwesomeIcons.xmark,
+                        size: 12,
+                      )),
                 ),
                 const SizedBox(height: 10),
                 const CustomTextFormField(
-                  minLines: 13,
-                  maxLines: 13,
+                  minLines: 10,
+                  maxLines: 10,
                   hintText: "Escribe aqui...",
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 7),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -77,44 +81,52 @@ class _NoteScreenState extends State<NoteScreen> {
                             onPressed: () {},
                             icon: const FaIcon(
                               FontAwesomeIcons.bold,
-                              size: 13,
+                              size: 12,
                             )),
-                        const SizedBox(width: 8),
+                        //const SizedBox(width: 0.5),
                         IconButton(
                             tooltip: 'Cursiva',
                             onPressed: () {},
                             icon: const FaIcon(
                               FontAwesomeIcons.italic,
-                              size: 13,
+                              size: 12,
                             )),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 0.5),
                         IconButton(
                             tooltip: 'Subrayado',
                             onPressed: () {},
                             icon: const FaIcon(
                               FontAwesomeIcons.underline,
-                              size: 13,
+                              size: 12,
                             )),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 0.5),
                         IconButton(
                             tooltip: 'Tachado',
                             onPressed: () {},
                             icon: const FaIcon(
                               FontAwesomeIcons.strikethrough,
-                              size: 13,
+                              size: 12,
                             )),
                         IconButton(
                             tooltip: 'Activar/desactivar viñetas',
                             onPressed: () {},
                             icon: const FaIcon(
                               FontAwesomeIcons.listUl,
-                              size: 13,
+                              size: 12,
                             )),
                       ],
                     ),
-                    const CustomElevatedButton(
-                      text: 'Guardar',
+                    Flexible(
+                      child: CustomElevatedButton(
+                          child: IconButton(
+                              tooltip: 'Guardar',
+                              onPressed: () {},
+                              icon: const FaIcon(
+                                FontAwesomeIcons.solidFloppyDisk,
+                                size: 14,
+                              ))),
                     ),
+                    const SizedBox(height: 3),
                   ],
                 ),
               ],

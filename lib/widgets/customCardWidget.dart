@@ -13,7 +13,7 @@ class Customcardwidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-            height: 150,
+            height: 180,
             child: Column(
               children: [
                 const SizedBox(height: 15),

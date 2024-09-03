@@ -8,6 +8,7 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
+      height: 55,
       backgroundColor: Colors.white54,
       onDestinationSelected: (int index) {
         if (index != currentIndex) {
