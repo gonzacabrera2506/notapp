@@ -13,13 +13,6 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.tealAccent,
-          foregroundColor: Colors.black,
-          elevation: 3,
-        ),
-        onPressed: action ?? () {},
-        child: child);
+    return ElevatedButton(onPressed: action ?? () {}, child: child);
   }
 }

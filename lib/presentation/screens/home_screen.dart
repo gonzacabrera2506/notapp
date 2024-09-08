@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notapp/presentation/blocs/bloc/dark_theme_bloc.dart';
 import 'package:notapp/widgets/customBottomNavigationBar_widget.dart';
 import 'package:notapp/widgets/customCardWidget.dart';
 
@@ -11,22 +13,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool dark = false;
-  void _updateLabelCustomButtom() {
-    setState(() {
-      dark = !dark;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1),
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
             toolbarHeight: 50,
-            backgroundColor: Colors.tealAccent,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             title: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -45,11 +40,22 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: IconButton(
-                    icon: Icon(
-                      dark ? Icons.wb_sunny_outlined : Icons.dark_mode,
-                      color: Theme.of(context).colorScheme.primary,
+                    icon: BlocBuilder<DarkThemeBloc, DarkThemeState>(
+                      builder: (context, state) {
+                        return Icon(
+                          state.dark
+                              ? Icons.wb_sunny_outlined
+                              : Icons.dark_mode,
+                        );
+                      },
                     ),
-                    onPressed: _updateLabelCustomButtom,
+                    onPressed: () {
+                      final isDarkTheme =
+                          context.read<DarkThemeBloc>().state.dark;
+                      context
+                          .read<DarkThemeBloc>()
+                          .add(SetDarkTheme(isDarkTheme: !isDarkTheme));
+                    },
                   ))
             ],
           ),

@@ -9,7 +9,7 @@ class CustomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavigationBar(
       height: 55,
-      backgroundColor: Colors.white54,
+      backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
       onDestinationSelected: (int index) {
         if (index != currentIndex) {
           switch (index) {
@@ -22,7 +22,8 @@ class CustomNavigationBar extends StatelessWidget {
           }
         }
       },
-      indicatorColor: Colors.tealAccent,
+      indicatorColor:
+          Theme.of(context).bottomNavigationBarTheme.backgroundColor,
       selectedIndex: currentIndex,
       destinations: const <Widget>[
         NavigationDestination(

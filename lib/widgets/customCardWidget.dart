@@ -7,7 +7,7 @@ class Customcardwidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      color: Colors.white,
+      color: Theme.of(context).cardTheme.color,
       shadowColor: Colors.black87,
       child: Column(
         mainAxisSize: MainAxisSize.min,

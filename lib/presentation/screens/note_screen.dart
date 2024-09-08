@@ -18,10 +18,10 @@ class _NoteScreenState extends State<NoteScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 1),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           toolbarHeight: 50,
-          backgroundColor: Colors.tealAccent,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           title:
               const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             Row(
@@ -116,7 +116,7 @@ class _NoteScreenState extends State<NoteScreen> {
                             )),
                       ],
                     ),
-                    Flexible(
+                    Expanded(
                       child: CustomElevatedButton(
                           child: IconButton(
                               tooltip: 'Guardar',
