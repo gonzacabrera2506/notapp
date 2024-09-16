@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notapp/presentation/blocs/bloc/dark_theme_bloc.dart';
+import 'package:notapp/presentation/blocs/bloc/dark_theme/dark_theme_bloc.dart';
 import 'package:notapp/widgets/customBottomNavigationBar_widget.dart';
 import 'package:notapp/widgets/customCardWidget.dart';
 
@@ -22,6 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            )),
             title: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

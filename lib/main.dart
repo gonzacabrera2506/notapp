@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notapp/config/router/app_router.dart';
 import 'package:notapp/config/theme/app_theme.dart';
-import 'package:notapp/presentation/blocs/bloc/dark_theme_bloc.dart';
+import 'package:notapp/presentation/blocs/bloc/dark_theme/dark_theme_bloc.dart';
 
 void main() {
   runApp(const MainApp());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final TextEditingController controller;
   final int minLines;
   final int maxLines;
   final String hintText;
@@ -10,7 +11,8 @@ class CustomTextFormField extends StatelessWidget {
       required this.minLines,
       required this.maxLines,
       required this.hintText,
-      this.suffixIcon});
+      this.suffixIcon,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {

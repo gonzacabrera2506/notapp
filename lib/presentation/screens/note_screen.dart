@@ -13,6 +13,9 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
+  final TextEditingController _titulo = TextEditingController();
+  final TextEditingController _descripcion = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,6 +57,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 ),
                 const SizedBox(height: 8),
                 CustomTextFormField(
+                  controller: _titulo,
                   minLines: 1,
                   maxLines: 1,
                   hintText: "Título...",
@@ -65,7 +69,8 @@ class _NoteScreenState extends State<NoteScreen> {
                       )),
                 ),
                 const SizedBox(height: 10),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _descripcion,
                   minLines: 10,
                   maxLines: 10,
                   hintText: "Escribe aqui...",
