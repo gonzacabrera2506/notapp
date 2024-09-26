@@ -6,13 +6,13 @@ part 'note.g.dart';
 class Note {
   Id? isarId;
 
-  final int id;
+  // final int id;
   final DateTime date;
   final String title;
   final String description;
 
   Note(
-      {required this.id,
+      {this.isarId,
       required this.date,
       required this.title,
       required this.description});

@@ -15,7 +15,7 @@ extension GetNoteCollection on Isar {
 
 const NoteSchema = CollectionSchema(
   name: r'Note',
-  id: 6284318083599466921,
+  id: 628431,
   properties: {
     r'date': PropertySchema(
       id: 0,
@@ -27,13 +27,8 @@ const NoteSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'id': PropertySchema(
-      id: 2,
-      name: r'id',
-      type: IsarType.long,
-    ),
     r'title': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'title',
       type: IsarType.string,
     )
@@ -71,8 +66,7 @@ void _noteSerialize(
 ) {
   writer.writeDateTime(offsets[0], object.date);
   writer.writeString(offsets[1], object.description);
-  writer.writeLong(offsets[2], object.id);
-  writer.writeString(offsets[3], object.title);
+  writer.writeString(offsets[2], object.title);
 }
 
 Note _noteDeserialize(
@@ -84,10 +78,9 @@ Note _noteDeserialize(
   final object = Note(
     date: reader.readDateTime(offsets[0]),
     description: reader.readString(offsets[1]),
-    id: reader.readLong(offsets[2]),
-    title: reader.readString(offsets[3]),
+    isarId: id,
+    title: reader.readString(offsets[2]),
   );
-  object.isarId = id;
   return object;
 }
 
@@ -103,8 +96,6 @@ P _noteDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readLong(offset)) as P;
-    case 3:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -381,58 +372,6 @@ extension NoteQueryFilter on QueryBuilder<Note, Note, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Note, Note, QAfterFilterCondition> idEqualTo(int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Note, Note, QAfterFilterCondition> idGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Note, Note, QAfterFilterCondition> idLessThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Note, Note, QAfterFilterCondition> idBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<Note, Note, QAfterFilterCondition> isarIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -659,18 +598,6 @@ extension NoteQuerySortBy on QueryBuilder<Note, Note, QSortBy> {
     });
   }
 
-  QueryBuilder<Note, Note, QAfterSortBy> sortById() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Note, Note, QAfterSortBy> sortByIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.desc);
-    });
-  }
-
   QueryBuilder<Note, Note, QAfterSortBy> sortByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
@@ -706,18 +633,6 @@ extension NoteQuerySortThenBy on QueryBuilder<Note, Note, QSortThenBy> {
   QueryBuilder<Note, Note, QAfterSortBy> thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Note, Note, QAfterSortBy> thenById() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Note, Note, QAfterSortBy> thenByIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.desc);
     });
   }
 
@@ -760,12 +675,6 @@ extension NoteQueryWhereDistinct on QueryBuilder<Note, Note, QDistinct> {
     });
   }
 
-  QueryBuilder<Note, Note, QDistinct> distinctById() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'id');
-    });
-  }
-
   QueryBuilder<Note, Note, QDistinct> distinctByTitle(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -790,12 +699,6 @@ extension NoteQueryProperty on QueryBuilder<Note, Note, QQueryProperty> {
   QueryBuilder<Note, String, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
-    });
-  }
-
-  QueryBuilder<Note, int, QQueryOperations> idProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id');
     });
   }
 
