@@ -24,148 +24,144 @@ class _NoteScreenState extends State<NoteScreen> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 1),
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          title:
-              const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Row(
-              children: [
-                Icon(Icons.note),
-                SizedBox(width: 10),
-                Text(
-                  'NotApp',
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ]),
-        ),
-        body: BlocProvider(
-          create: (context) => getIt<NoteBloc>(),
-          child: Builder(builder: (BuildContext newContext) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 9),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Agregar Nota",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    CustomTextFormField(
-                      controller: _titulo,
-                      minLines: 1,
-                      maxLines: 1,
-                      hintText: "Título...",
-                      suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const FaIcon(
-                            FontAwesomeIcons.xmark,
-                            size: 12,
-                          )),
-                    ),
-                    const SizedBox(height: 10),
-                    CustomTextFormField(
-                      controller: _descripcion,
-                      minLines: 10,
-                      maxLines: 10,
-                      hintText: "Escribe aqui...",
-                    ),
-                    const SizedBox(height: 7),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                                tooltip: 'Negrita',
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.bold,
-                                  size: 12,
-                                )),
-                            //const SizedBox(width: 0.5),
-                            IconButton(
-                                tooltip: 'Cursiva',
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.italic,
-                                  size: 12,
-                                )),
-                            const SizedBox(width: 0.5),
-                            IconButton(
-                                tooltip: 'Subrayado',
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.underline,
-                                  size: 12,
-                                )),
-                            const SizedBox(width: 0.5),
-                            IconButton(
-                                tooltip: 'Tachado',
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.strikethrough,
-                                  size: 12,
-                                )),
-                            IconButton(
-                                tooltip: 'Activar/desactivar viñetas',
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.listUl,
-                                  size: 12,
-                                )),
-                          ],
-                        ),
-                        Expanded(
-                          child: CustomElevatedButton(
-                            child: IconButton(
-                                tooltip: 'Guardar',
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.solidFloppyDisk,
-                                  size: 14,
-                                )),
-                            action: () {
-                              final newNote = Note(
-                                date: DateTime.now(),
-                                title: _titulo.text,
-                                description: _descripcion.text,
-                              );
-                              // Llama al evento para agregar una nueva nota
-                              try {
-                                newContext
-                                    .read<NoteBloc>()
-                                    .add(AddNewNoteEvent(note: newNote));
-                              } catch (e) {
-                                print(e);
-                              }
-                            },
+      child: BlocProvider(
+        create: (context) => getIt<NoteBloc>(),
+        child: Builder(builder: (BuildContext newContext) {
+          return BlocListener<NoteBloc, NoteState>(
+            listener: (context, state) {},
+            child: Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              appBar: AppBar(
+                toolbarHeight: 50,
+                backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                title: const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.note),
+                          SizedBox(width: 10),
+                          Text(
+                            'NotApp',
+                            style: TextStyle(fontWeight: FontWeight.w600),
                           ),
-                        ),
-                        const SizedBox(height: 3),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ]),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 9),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Agregar Nota",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      CustomTextFormField(
+                        controller: _titulo,
+                        minLines: 1,
+                        maxLines: 1,
+                        hintText: "Título...",
+                        suffixIcon: IconButton(
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.xmark,
+                              size: 12,
+                            )),
+                      ),
+                      const SizedBox(height: 10),
+                      CustomTextFormField(
+                        controller: _descripcion,
+                        minLines: 10,
+                        maxLines: 10,
+                        hintText: "Escribe aqui...",
+                      ),
+                      const SizedBox(height: 7),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              IconButton(
+                                  tooltip: 'Negrita',
+                                  onPressed: () {},
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.bold,
+                                    size: 12,
+                                  )),
+                              //const SizedBox(width: 0.5),
+                              IconButton(
+                                  tooltip: 'Cursiva',
+                                  onPressed: () {},
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.italic,
+                                    size: 12,
+                                  )),
+                              const SizedBox(width: 0.5),
+                              IconButton(
+                                  tooltip: 'Subrayado',
+                                  onPressed: () {},
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.underline,
+                                    size: 12,
+                                  )),
+                              const SizedBox(width: 0.5),
+                              IconButton(
+                                  tooltip: 'Tachado',
+                                  onPressed: () {},
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.strikethrough,
+                                    size: 12,
+                                  )),
+                              IconButton(
+                                  tooltip: 'Activar/desactivar viñetas',
+                                  onPressed: () {},
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.listUl,
+                                    size: 12,
+                                  )),
+                            ],
+                          ),
+                          Expanded(
+                            child: CustomElevatedButton(
+                              action: () {
+                                final newNote = Note(
+                                  date: DateTime.now(),
+                                  title: _titulo.text,
+                                  description: _descripcion.text,
+                                );
+                                try {
+                                  newContext
+                                      .read<NoteBloc>()
+                                      .add(AddNewNoteEvent(note: newNote));
+                                } catch (e) {
+                                  print(e);
+                                }
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            );
-          }),
-        ),
-        bottomNavigationBar: const CustomNavigationBar(
-          currentIndex: 1,
-        ),
+              bottomNavigationBar: const CustomNavigationBar(
+                currentIndex: 1,
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

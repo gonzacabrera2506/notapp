@@ -26,7 +26,6 @@ class IsarDatasource extends LocalStorageDatasource {
 
     isar.writeTxn(() async {
       await isar.notes.put(note);
-      print("hola mundo");
     });
   }
 
