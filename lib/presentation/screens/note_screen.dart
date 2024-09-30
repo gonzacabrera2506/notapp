@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,6 +36,10 @@ class _NoteScreenState extends State<NoteScreen> {
               appBar: AppBar(
                 toolbarHeight: 50,
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(10),
+                )),
                 title: const Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -133,18 +139,31 @@ class _NoteScreenState extends State<NoteScreen> {
                           ),
                           Expanded(
                             child: CustomElevatedButton(
+                              text: "Guardar",
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.solidFloppyDisk,
+                                    size: 14,
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text("Guardar")
+                                ],
+                              ),
                               action: () {
                                 final newNote = Note(
                                   date: DateTime.now(),
                                   title: _titulo.text,
                                   description: _descripcion.text,
                                 );
+
                                 try {
                                   newContext
                                       .read<NoteBloc>()
                                       .add(AddNewNoteEvent(note: newNote));
                                 } catch (e) {
-                                  print(e);
+                                  log(e.toString());
                                 }
                               },
                             ),
