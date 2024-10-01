@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:notapp/di/locator.dart';
 import 'package:notapp/domain/entities/note.dart';
 import 'package:notapp/presentation/blocs/bloc/note/note_bloc.dart';
@@ -140,18 +140,72 @@ class _NoteScreenState extends State<NoteScreen> {
                           Expanded(
                             child: CustomElevatedButton(
                               text: "Guardar",
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.solidFloppyDisk,
-                                    size: 14,
-                                  ),
-                                  SizedBox(width: 2),
-                                  Text("Guardar")
-                                ],
+                              child: const FittedBox(
+                                fit: BoxFit.none,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.solidFloppyDisk,
+                                      size: 14,
+                                    ),
+                                    SizedBox(width: 1),
+                                    Text("Guardar")
+                                  ],
+                                ),
                               ),
                               action: () {
+                                if (_titulo.text.isEmpty &&
+                                    _descripcion.text.isEmpty) {
+                                  MotionToast.error(
+                                    displaySideBar: false,
+                                    title: const Text(
+                                      "Atencion!",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    description: const Text(
+                                        "Los campos titulo y descripcion no pueden estar vacios."),
+                                    toastDuration: const Duration(seconds: 3),
+                                    barrierColor: Colors.red.shade100,
+                                  ).show(context);
+                                  return;
+                                }
+                                if (_titulo.text.isEmpty) {
+                                  MotionToast.error(
+                                    displaySideBar: false,
+                                    title: const Text(
+                                      "Atencion!",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    description: const Text(
+                                      "El campo titulo no puede estar vacio.",
+                                    ),
+                                    toastDuration: const Duration(seconds: 3),
+                                    barrierColor: Colors.red.shade100,
+                                  ).show(context);
+                                  return;
+                                }
+                                if (_descripcion.text.isEmpty) {
+                                  MotionToast.error(
+                                    displaySideBar: false,
+                                    title: const Text(
+                                      "Atencion!",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    description: const Text(
+                                        "El campo descripcion no puede estar vacio."),
+                                    toastDuration: const Duration(seconds: 3),
+                                    barrierColor: Colors.red.shade100,
+                                  ).show(context);
+                                  return;
+                                }
+
                                 final newNote = Note(
                                   date: DateTime.now(),
                                   title: _titulo.text,
