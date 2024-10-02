@@ -13,14 +13,16 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   }
 
   void _onAddNewNote(AddNewNoteEvent event, Emitter<NoteState> emit) async {
-    emit(state.copyWith(isSuccess: true, isFailure: false));
     try {
       await addNoteRepository.addNote(event.note);
+      emit(state.copyWith(isSuccess: true, isFailure: false));
+      emit(state.copyWith(isSuccess: false));
     } catch (e) {
       emit(state.copyWith(
           isFailure: true,
           errorMessage:
               'Error en el registro de la nota. Intente nuevamente mas tarde.'));
+      emit(state.copyWith(isFailure: false));
     }
   }
 }

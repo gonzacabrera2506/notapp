@@ -4,12 +4,14 @@ class CustomElevatedButton extends StatelessWidget {
   final String? text;
   final Function()? action;
   final Widget child;
+  final ButtonStyle? style;
 
   const CustomElevatedButton({
     super.key,
     this.action,
     this.text,
     required this.child,
+    this.style,
   });
 
   @override
@@ -17,6 +19,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: action ?? () {},
       child: child,
+      style: style,
     );
   }
 }

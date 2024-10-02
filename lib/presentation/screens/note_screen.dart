@@ -30,7 +30,38 @@ class _NoteScreenState extends State<NoteScreen> {
         create: (context) => getIt<NoteBloc>(),
         child: Builder(builder: (BuildContext newContext) {
           return BlocListener<NoteBloc, NoteState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              if (state.isFailure) {
+                MotionToast.error(
+                  displaySideBar: false,
+                  title: const Text(
+                    "Error!",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  description: const Text(
+                      "Hubo un error en el guardado de la nota. Intente nuevamente mas tarde."),
+                  animationCurve: Curves.bounceOut,
+                  position: MotionToastPosition.top,
+                  toastDuration: const Duration(seconds: 3),
+                  barrierColor: Colors.red.shade100,
+                ).show(context);
+              }
+              if (state.isSuccess) {
+                MotionToast.success(
+                        displaySideBar: false,
+                        title: const Text(
+                          "Nota guardada",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        description:
+                            const Text("Su nota se ha guardado exitosamente."),
+                        position: MotionToastPosition.top,
+                        toastDuration: const Duration(seconds: 3),
+                        animationCurve: Curves.ease)
+                    .show(context);
+              }
+            },
             child: Scaffold(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               appBar: AppBar(
@@ -78,7 +109,9 @@ class _NoteScreenState extends State<NoteScreen> {
                         maxLines: 1,
                         hintText: "Título...",
                         suffixIcon: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              _titulo.clear();
+                            },
                             icon: const FaIcon(
                               FontAwesomeIcons.xmark,
                               size: 12,
@@ -89,54 +122,78 @@ class _NoteScreenState extends State<NoteScreen> {
                         controller: _descripcion,
                         minLines: 10,
                         maxLines: 10,
-                        hintText: "Escribe aqui...",
+                        hintText: "Descripción...",
                       ),
                       const SizedBox(height: 7),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                  tooltip: 'Negrita',
-                                  onPressed: () {},
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.bold,
-                                    size: 12,
-                                  )),
-                              //const SizedBox(width: 0.5),
-                              IconButton(
-                                  tooltip: 'Cursiva',
-                                  onPressed: () {},
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.italic,
-                                    size: 12,
-                                  )),
-                              const SizedBox(width: 0.5),
-                              IconButton(
-                                  tooltip: 'Subrayado',
-                                  onPressed: () {},
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.underline,
-                                    size: 12,
-                                  )),
-                              const SizedBox(width: 0.5),
-                              IconButton(
-                                  tooltip: 'Tachado',
-                                  onPressed: () {},
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.strikethrough,
-                                    size: 12,
-                                  )),
-                              IconButton(
-                                  tooltip: 'Activar/desactivar viñetas',
-                                  onPressed: () {},
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.listUl,
-                                    size: 12,
-                                  )),
-                            ],
-                          ),
+                          //TO DO: next version
+                          // Row(
+                          //   children: [
+                          //     IconButton(
+                          //         tooltip: 'Negrita',
+                          //         onPressed: () {},
+                          //         icon: const FaIcon(
+                          //           FontAwesomeIcons.bold,
+                          //           size: 12,
+                          //         )),
+                          //     //const SizedBox(width: 0.5),
+                          //     IconButton(
+                          //         tooltip: 'Cursiva',
+                          //         onPressed: () {},
+                          //         icon: const FaIcon(
+                          //           FontAwesomeIcons.italic,
+                          //           size: 12,
+                          //         )),
+                          //     const SizedBox(width: 0.5),
+                          //     IconButton(
+                          //         tooltip: 'Subrayado',
+                          //         onPressed: () {},
+                          //         icon: const FaIcon(
+                          //           FontAwesomeIcons.underline,
+                          //           size: 12,
+                          //         )),
+                          //     const SizedBox(width: 0.5),
+                          //     IconButton(
+                          //         tooltip: 'Tachado',
+                          //         onPressed: () {},
+                          //         icon: const FaIcon(
+                          //           FontAwesomeIcons.strikethrough,
+                          //           size: 12,
+                          //         )),
+                          //     IconButton(
+                          //         tooltip: 'Activar/desactivar viñetas',
+                          //         onPressed: () {},
+                          //         icon: const FaIcon(
+                          //           FontAwesomeIcons.listUl,
+                          //           size: 12,
+                          //         )),
+                          //   ],
+                          // ),
+                          Expanded(
+                              child: CustomElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent),
+                            child: const FittedBox(
+                              fit: BoxFit.none,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.trash,
+                                    size: 14,
+                                  ),
+                                  SizedBox(width: 1),
+                                  Text("Borrar todo")
+                                ],
+                              ),
+                            ),
+                            action: () {
+                              _descripcion.clear();
+                            },
+                          )),
+                          const SizedBox(width: 4),
                           Expanded(
                             child: CustomElevatedButton(
                               text: "Guardar",
@@ -168,6 +225,8 @@ class _NoteScreenState extends State<NoteScreen> {
                                     description: const Text(
                                         "Los campos titulo y descripcion no pueden estar vacios."),
                                     toastDuration: const Duration(seconds: 3),
+                                    animationCurve: Curves.bounceOut,
+                                    position: MotionToastPosition.top,
                                     barrierColor: Colors.red.shade100,
                                   ).show(context);
                                   return;
@@ -185,6 +244,8 @@ class _NoteScreenState extends State<NoteScreen> {
                                       "El campo titulo no puede estar vacio.",
                                     ),
                                     toastDuration: const Duration(seconds: 3),
+                                    animationCurve: Curves.bounceOut,
+                                    position: MotionToastPosition.top,
                                     barrierColor: Colors.red.shade100,
                                   ).show(context);
                                   return;
@@ -201,6 +262,8 @@ class _NoteScreenState extends State<NoteScreen> {
                                     description: const Text(
                                         "El campo descripcion no puede estar vacio."),
                                     toastDuration: const Duration(seconds: 3),
+                                    animationCurve: Curves.bounceOut,
+                                    position: MotionToastPosition.top,
                                     barrierColor: Colors.red.shade100,
                                   ).show(context);
                                   return;
@@ -216,6 +279,8 @@ class _NoteScreenState extends State<NoteScreen> {
                                   newContext
                                       .read<NoteBloc>()
                                       .add(AddNewNoteEvent(note: newNote));
+                                  _titulo.clear();
+                                  _descripcion.clear();
                                 } catch (e) {
                                   log(e.toString());
                                 }
