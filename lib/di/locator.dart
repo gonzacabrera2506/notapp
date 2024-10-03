@@ -10,5 +10,5 @@ void setupLocator() {
       () => LocalStorageRepositoryImpl(IsarDatasource()));
 
   getIt.registerFactory(
-      () => NoteBloc(addNoteRepository: getIt<LocalStorageRepositoryImpl>()));
+      () => NoteBloc(noteRepository: getIt<LocalStorageRepositoryImpl>()));
 }

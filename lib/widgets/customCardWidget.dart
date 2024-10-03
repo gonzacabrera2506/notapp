@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Customcardwidget extends StatelessWidget {
-  const Customcardwidget({super.key});
+  final Text title;
+  final Text subtitle;
+  const Customcardwidget({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +23,14 @@ class Customcardwidget extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 15),
-                const ListTile(
-                  leading: Icon(Icons.notes_outlined),
-                  title: Text(
-                    'The Enchanted Nightingale',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle:
-                      Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                ListTile(
+                  leading: const Icon(Icons.notes_outlined),
+                  title: title,
+                  subtitle: subtitle,
                 ),
                 const SizedBox(height: 15),
                 ButtonTheme(
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: <Widget>[
                       IconButton(
                           tooltip: 'Eliminar nota',
