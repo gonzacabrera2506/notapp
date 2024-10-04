@@ -16,17 +16,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-    context.read<NoteBloc>().add(const LoadNotesEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1),
         child: BlocProvider(
-          create: (context) => getIt<NoteBloc>(),
+          create: (context) => getIt<NoteBloc>()..add(const LoadNotesEvent()),
           child: Builder(builder: (BuildContext newContext) {
             return BlocListener<NoteBloc, NoteState>(
               listener: (context, state) {
@@ -83,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: SingleChildScrollView(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         const SizedBox(height: 9),
                         const Row(
@@ -95,23 +90,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        Expanded(child: BlocBuilder<NoteBloc, NoteState>(
-                            builder: (context, state) {
-                          if (state.notes.isEmpty) {
-                            return const Center(
-                                child: Text("No hay notas disponibles"));
-                          }
-                          return ListView.builder(
-                            itemCount: state.notes.length,
-                            itemBuilder: (context, index) {
-                              final note = state.notes[index];
+                        Flexible(
+                            fit: FlexFit.loose,
+                            child: BlocBuilder<NoteBloc, NoteState>(
+                                builder: (context, state) {
+                              if (state.notes.isEmpty) {
+                                return const Center(
+                                    child: Text("No hay notas disponibles"));
+                              }
+                              for (var note in state.notes) {
+                                print(
+                                    "Nota: Título - ${note.title}, Descripción - ${note.description}");
+                              }
+                              return ListView.builder(
+                                itemCount: state.notes.length,
+                                itemBuilder: (context, index) {
+                                  final note = state.notes[index];
 
-                              return Customcardwidget(
-                                  title: Text(note.title.toString()),
-                                  subtitle: Text(note.description.toString()));
-                            },
-                          );
-                        }))
+                                  return Customcardwidget(
+                                      title: Text(note.title.toString()),
+                                      subtitle:
+                                          Text(note.description.toString()));
+                                },
+                              );
+                            }))
                         // SizedBox(height: 10),
                         // Customcardwidget(),
                         // SizedBox(height: 15),
