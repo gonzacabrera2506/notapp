@@ -75,58 +75,58 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 9),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Mis Notas",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        Flexible(
-                            fit: FlexFit.loose,
-                            child: BlocBuilder<NoteBloc, NoteState>(
-                                builder: (context, state) {
-                              if (state.notes.isEmpty) {
-                                return const Center(
-                                    child: Text("No hay notas disponibles"));
-                              }
-                              for (var note in state.notes) {
-                                print(
-                                    "Nota: Título - ${note.title}, Descripción - ${note.description}");
-                              }
-                              return ListView.builder(
-                                itemCount: state.notes.length,
-                                itemBuilder: (context, index) {
-                                  final note = state.notes[index];
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 9),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Mis Notas",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Flexible(
+                          fit: FlexFit.loose,
+                          child: BlocBuilder<NoteBloc, NoteState>(
+                              builder: (context, state) {
+                            if (state.notes.isEmpty) {
+                              return const Center(
+                                  child: Text("No hay notas disponibles"));
+                            }
+                            return ListView.builder(
+                              itemCount: state.notes.length,
+                              itemBuilder: (context, index) {
+                                final note = state.notes[index];
 
-                                  return Customcardwidget(
-                                      title: Text(note.title.toString()),
-                                      subtitle:
-                                          Text(note.description.toString()));
-                                },
-                              );
-                            }))
-                        // SizedBox(height: 10),
-                        // Customcardwidget(),
-                        // SizedBox(height: 15),
-                        // Customcardwidget(),
-                        // SizedBox(height: 15),
-                        // Customcardwidget(),
-                        // SizedBox(height: 15),
-                        // Customcardwidget(),
-                        // SizedBox(height: 15),
-                        // Customcardwidget(),
-                        // SizedBox(height: 15),
-                      ],
-                    ),
+                                return Customcardwidget(
+                                  title: Text(note.title.toString()),
+                                  subtitle: Text(note.description.toString()),
+                                  modified: (int index) {
+                                    print("modificar");
+                                  },
+                                  delete: (int index) {
+                                    print("eliminar");
+                                  },
+                                );
+                              },
+                            );
+                          }))
+                      // SizedBox(height: 10),
+                      // Customcardwidget(),
+                      // SizedBox(height: 15),
+                      // Customcardwidget(),
+                      // SizedBox(height: 15),
+                      // Customcardwidget(),
+                      // SizedBox(height: 15),
+                      // Customcardwidget(),
+                      // SizedBox(height: 15),
+                      // Customcardwidget(),
+                      // SizedBox(height: 15),
+                    ],
                   ),
                 ),
                 bottomNavigationBar: const CustomNavigationBar(

@@ -29,8 +29,9 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
   void _onLoadNotes(LoadNotesEvent event, Emitter<NoteState> emit) async {
     try {
-      await noteRepository.loadNotes(limit: 10, offset: 0);
-      emit(state.copyWith(isSuccess: true, isFailure: false));
+      final notes = await noteRepository.loadNotes(limit: 10, offset: 0);
+      print(notes);
+      emit(state.copyWith(isSuccess: true, isFailure: false, notes: notes));
       emit(state.copyWith(isSuccess: false));
     } catch (e) {
       emit(state.copyWith(
