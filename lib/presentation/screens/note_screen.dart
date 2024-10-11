@@ -32,19 +32,63 @@ class _NoteScreenState extends State<NoteScreen> {
           return BlocListener<NoteBloc, NoteState>(
             listener: (context, state) {
               if (state.isFailure) {
-                MotionToast.error(
-                  displaySideBar: false,
-                  title: const Text(
-                    "Error!",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  description: const Text(
-                      "Hubo un error en el guardado de la nota. Intente nuevamente mas tarde."),
-                  animationCurve: Curves.bounceOut,
-                  position: MotionToastPosition.top,
-                  toastDuration: const Duration(seconds: 3),
-                  barrierColor: Colors.red.shade100,
-                ).show(context);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    // Iniciar un temporizador para cerrar el diálogo después de 3 segundos
+                    Future.delayed(const Duration(seconds: 30), () {
+                      Navigator.of(context)
+                          .pop(); // Cierra el diálogo automáticamente
+                    });
+
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            20), // Bordes redondeados del AlertDialog
+                      ),
+                      titlePadding: EdgeInsets.zero,
+                      titleTextStyle:
+                          const TextStyle(fontWeight: FontWeight.bold),
+                      title: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.red, // Color de fondo de la franja
+                            borderRadius: BorderRadius.only(
+                              // Bordes redondeados solo en la parte superior
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(10),
+                          child: const Text('Error!')),
+                      content: const Text(
+                          'No se pudo grabar la nota. Intente nuevamente.'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Aceptar'),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pop(); // Cierra el diálogo manualmente
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                // MotionToast.error(
+                //   displaySideBar: false,
+                //   title: const Text(
+                //     "Error!",
+                //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                //   ),
+                //   description: const Text(
+                //       "Hubo un error en el guardado de la nota. Intente nuevamente mas tarde."),
+                //   animationCurve: Curves.bounceOut,
+                //   position: MotionToastPosition.bottom,
+                //   toastDuration: const Duration(seconds: 3),
+                //   barrierColor: Colors.red.shade100,
+                // ).show(context);
               }
               if (state.isSuccess) {
                 MotionToast.success(
