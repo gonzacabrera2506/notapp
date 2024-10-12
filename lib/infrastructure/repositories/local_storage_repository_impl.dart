@@ -16,4 +16,9 @@ class LocalStorageRepositoryImpl extends LocalStorageRepository {
   Future<List<Note>> loadNotes({int limit = 10, offset = 0}) {
     return datasource.loadNotes(limit: limit, offset: offset);
   }
+
+  @override
+  Future<bool> deleteNote(int id) {
+    return datasource.deleteNote(id);
+  }
 }

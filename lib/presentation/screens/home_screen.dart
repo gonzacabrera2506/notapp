@@ -103,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 final note = state.notes[index];
 
                                 return Customcardwidget(
+                                  trailing: Text(note.date.toString()),
                                   title: Text(note.title.toString()),
                                   subtitle: Text(note.description.toString()),
                                   modified: (int index) {

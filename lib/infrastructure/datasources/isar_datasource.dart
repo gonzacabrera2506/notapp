@@ -35,4 +35,11 @@ class IsarDatasource extends LocalStorageDatasource {
 
     return isar.notes.where().offset(offset).limit(limit).findAll();
   }
+
+  @override
+  Future<bool> deleteNote(int id) async {
+    final isar = await db;
+
+    return isar.notes.delete(id);
+  }
 }

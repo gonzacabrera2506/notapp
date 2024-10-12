@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Customcardwidget extends StatelessWidget {
+  final Text trailing;
   final Text title;
   final Text subtitle;
   final Function(int) modified;
   final Function(int) delete;
   const Customcardwidget({
     super.key,
+    required this.trailing,
     required this.title,
     required this.subtitle,
     required this.modified,
@@ -35,6 +37,7 @@ class Customcardwidget extends StatelessWidget {
                 children: [
                   const SizedBox(height: 15),
                   ListTile(
+                    trailing: trailing,
                     leading: const Icon(Icons.notes_outlined),
                     title: title,
                     subtitle: subtitle,
