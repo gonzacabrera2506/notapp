@@ -27,22 +27,29 @@ class Customcardwidget extends StatelessWidget {
           SizedBox(
             height: 180,
             child: Padding(
-              padding: const EdgeInsets.only(
-                top: 5,
-                bottom: 2,
-                right: 3,
-                left: 3,
-              ),
+              padding: const EdgeInsets.all(5),
               child: Column(
                 children: [
-                  const SizedBox(height: 15),
-                  ListTile(
-                    trailing: trailing,
-                    leading: const Icon(Icons.notes_outlined),
-                    title: title,
-                    subtitle: subtitle,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          //trailing: trailing,
+                          leading: const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: Icon(
+                                Icons.notes_outlined,
+                                size: 30,
+                              )),
+                          title: title,
+                          subtitle: subtitle,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 15),
+                  const Spacer(),
                   ButtonTheme(
                     child: OverflowBar(
                       alignment: MainAxisAlignment.end,

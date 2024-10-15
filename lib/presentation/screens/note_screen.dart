@@ -39,7 +39,7 @@ class _NoteScreenState extends State<NoteScreen> {
                   description: const Center(
                     child: Text(
                       "Error en el guardado de la nota.",
-                      textAlign: TextAlign.center, 
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   animationCurve: Curves.bounceOut,
@@ -177,6 +177,10 @@ class _NoteScreenState extends State<NoteScreen> {
                           Expanded(
                               child: CustomElevatedButton(
                             style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Define el radio de borde
+                                ),
                                 backgroundColor: Colors.redAccent),
                             child: const FittedBox(
                               fit: BoxFit.none,
@@ -196,9 +200,13 @@ class _NoteScreenState extends State<NoteScreen> {
                               _descripcion.clear();
                             },
                           )),
-                          const SizedBox(width: 4),
+                          const SizedBox(width: 50),
                           Expanded(
                             child: CustomElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              ),
                               text: "Guardar",
                               child: const FittedBox(
                                 fit: BoxFit.none,

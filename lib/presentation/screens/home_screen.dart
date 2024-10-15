@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:notapp/di/locator.dart';
 import 'package:notapp/presentation/blocs/bloc/dark_theme/dark_theme_bloc.dart';
 import 'package:notapp/presentation/blocs/bloc/note/note_bloc.dart';
@@ -94,6 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: BlocBuilder<NoteBloc, NoteState>(
                               builder: (context, state) {
                             if (state.notes.isEmpty) {
+                              print(
+                                Text(DateFormat('dd/MM/yyyy')
+                                    .format(DateTime.now())
+                                    .toString()),
+                              );
                               return const Center(
                                   child: Text("No hay notas disponibles"));
                             }
@@ -103,8 +109,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 final note = state.notes[index];
 
                                 return Customcardwidget(
-                                  trailing: Text(note.date.toString()),
-                                  title: Text(note.title.toString()),
+                                  trailing: Text(DateFormat('dd/MM/yyyy')
+                                      .format(note.date)
+                                      .toString()),
+                                  title: Text(
+                                    note.title.toString(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   subtitle: Text(note.description.toString()),
                                   modified: (int index) {
                                     print("modificar");
@@ -116,17 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             );
                           }))
-                      // SizedBox(height: 10),
-                      // Customcardwidget(),
-                      // SizedBox(height: 15),
-                      // Customcardwidget(),
-                      // SizedBox(height: 15),
-                      // Customcardwidget(),
-                      // SizedBox(height: 15),
-                      // Customcardwidget(),
-                      // SizedBox(height: 15),
-                      // Customcardwidget(),
-                      // SizedBox(height: 15),
                     ],
                   ),
                 ),
