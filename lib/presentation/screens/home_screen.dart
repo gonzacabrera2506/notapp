@@ -90,18 +90,77 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
+                      Customcardwidget(
+                        title: Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'TITULOoooooooo\n', // Título con estilo
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                text: DateFormat('dd/MM/yyyy')
+                                    .format(DateTime.now()), // Fecha con estilo
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w100),
+                              ),
+                            ],
+                          ),
+                        ),
+                        subtitle: const Text(
+                            "note.description.toString()fsfsdfbsdhjfbsdhbfhjsdbfhjsdbfhsdbfhsdvfhsdvfjhsdvfjhsdvfhsdjvf"),
+                        modified: (int index) {
+                          print("modificar");
+                        },
+                        delete: (int index) {
+                          print("eliminar");
+                        },
+                      ),
+                      Customcardwidget(
+                        title: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'TITULOoooooooo\n', // Título con estilo
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Theme.of(context).cardTheme.color,
+                                ),
+                              ),
+                              TextSpan(
+                                text: DateFormat('dd/MM/yyyy')
+                                    .format(DateTime.now()), // Fecha con estilo
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w100),
+                              ),
+                            ],
+                          ),
+                        ),
+                        subtitle: const Text(
+                            "note.description.toString()fsfsdfbsdhjfbsdhbfhjsdbfhjsdbfhsdbfhsdvfhsdvfjhsdvfjhsdvfhsdjvf"),
+                        modified: (int index) {
+                          print("modificar");
+                        },
+                        delete: (int index) {
+                          print("eliminar");
+                        },
+                      ),
                       Flexible(
                           fit: FlexFit.loose,
                           child: BlocBuilder<NoteBloc, NoteState>(
                               builder: (context, state) {
                             if (state.notes.isEmpty) {
-                              print(
-                                Text(DateFormat('dd/MM/yyyy')
-                                    .format(DateTime.now())
-                                    .toString()),
-                              );
-                              return const Center(
-                                  child: Text("No hay notas disponibles"));
+                              // const Center(
+                              //     child: Text("No hay notas disponibles"));
                             }
                             return ListView.builder(
                               itemCount: state.notes.length,

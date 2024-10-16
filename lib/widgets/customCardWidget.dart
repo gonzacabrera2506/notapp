@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Customcardwidget extends StatelessWidget {
-  final Text trailing;
+  final Text? trailing;
   final Text title;
   final Text subtitle;
   final Function(int) modified;
   final Function(int) delete;
   const Customcardwidget({
     super.key,
-    required this.trailing,
+    this.trailing,
     required this.title,
     required this.subtitle,
     required this.modified,
@@ -18,7 +18,7 @@ class Customcardwidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
+      elevation: 5,
       color: Theme.of(context).cardTheme.color,
       shadowColor: Colors.black87,
       child: Column(
@@ -35,14 +35,6 @@ class Customcardwidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListTile(
-                          //trailing: trailing,
-                          leading: const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Icon(
-                                Icons.notes_outlined,
-                                size: 30,
-                              )),
                           title: title,
                           subtitle: subtitle,
                         ),
